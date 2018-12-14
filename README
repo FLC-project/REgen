@@ -1,0 +1,34 @@
+Authors: Angelo Borsotti
+
+This program contains the implementation the RE benchmark generation.
+
+Generation
+
+    The program has been developed with Oracle jdk 1.8.
+
+    javac -encoding UTF8  REgen.java
+    javac -encoding UTF8  REgenMain.java
+
+Installation
+
+    There is no need to install it, the program can be run directly from a command prompt.
+
+Run
+
+    - generate the corpus of REs and texts (strings)
+      - run: java -Dfile.encoding=UTF8 -Xmx1200m -Xss10m  REgenMain <benchmark>
+
+Tailoring
+
+    - REgenMain.java contains an example of benchmark generation. You can tailor it to
+      fit the generation of your specific benchmark:
+
+        - change the class MyEmitter, providing some implementation of the methods
+          in it, that allow you to store in whatever way you need the REs and texts.
+
+        - set the parameters to the values that represent best the characteristics
+          of your use case.
+
+    - compile and run REgenMain.java
+
+      
