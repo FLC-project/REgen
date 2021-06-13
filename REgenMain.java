@@ -55,15 +55,17 @@ public class REgenMain {
 
         REgen rg = new REgen();
 
-        rg.parameters.size = 12;
+        rg.parameters.size = 5;
         rg.parameters.depth = new int[]{2,5};
-        rg.parameters.balanced = false;             // parameters.balanced = false;
+        rg.parameters.balanced = true;              // parameters.balanced = false;
         rg.parameters.starHeight = null;            // parameters.starHeight = [2,6];
         rg.parameters.concarity = 0;                // parameters.concarity = 10;
         rg.parameters.altarity = 0;                 // parameters.altarity = 10;
         rg.parameters.leaves = REgen.LEAVES_TERM;   // parameters.leaves = LEAVES_TERM or LEAVES_SET
         rg.parameters.special = null;               // parameters.special = "#@";
         rg.parameters.adjacences = null;            // parameters.adjacences = [][];
+        rg.parameters.alphabet = "abcdefghijklmnopqrstuvwxyz";
+        rg.parameters.capturing = false;
 
         PrintStream writer = null;
         try {
@@ -78,7 +80,7 @@ public class REgenMain {
         REgen.Groups regr = new REgen.Groups();
         regr.groups = 10;
         regr.each = 100;
-        regr.step = 10;
+        regr.step = 5;
         REgen.Groups textgr = new REgen.Groups();
         textgr.groups = 10;
         textgr.each = 10;
@@ -86,9 +88,7 @@ public class REgenMain {
 
         rg.disallowNesting("?");
         rg.disallowNesting("{}");
-        // rg.generateCollection(regr,textgr,out);
 
-        rg.parameters.balanced = true;
         rg.generateCollection(regr,textgr,out);
 
         writer.close();
