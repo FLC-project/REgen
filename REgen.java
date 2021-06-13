@@ -4542,8 +4542,9 @@ public class REgen {
             if (this.parameters.progress){
                 System.out.printf("RE group %s done\n",i);
             }
-            res[i] = null;   // free space
-            texts[i] = null;   // free space
+            // Don't free space: RE and strings are still needed for serialization.
+            //res[i] = null;   // free space
+            //texts[i] = null; // free space
         }
         Trc.out.printf("collection: %s, RE: %s, texts: %s\n",
             parameters.balanced?"balanced":"unbalanced",regr,textgr);
@@ -4565,6 +4566,18 @@ public class REgen {
         long t1 = getCpuTime();
         System.out.printf("%s s\n",(t1-t0)/1000000000);
         Trc.out.printf("%s s\n",(t1-t0)/1000000000);
+
+        // emit serialized file
+        try {
+            FileOutputStream fileOut = new FileOutputStream("samples.ser");
+            ObjectOutputStream outs = new ObjectOutputStream(fileOut);
+            outs.writeObject(res);
+            outs.writeObject(texts);
+            outs.close();
+            fileOut.close();
+        } catch(IOException exc){
+            System.out.printf("serialization %s\n",exc);
+        }
     }
 
     /** The statistics of texts generation. */
