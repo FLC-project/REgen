@@ -581,6 +581,10 @@ public class REgen {
                     if (i.kind == A_ALT && parameters.capturing){
                         sb.append("(");
                     }
+                    //if (i.kind == A_EMP || (i.kind == A_CON && i.son.kind == A_EMP)) {
+                    //    // Avoid generating RE with empty subexpressions, like (|a) or (a||b).
+                    //    sb.append("()");
+                    //}
                     i.toRE(sb);
                     if (i.kind == A_ALT && parameters.capturing){
                         sb.append(")");
@@ -2281,10 +2285,6 @@ public class REgen {
     private void getLeaf(AstNode a){
         if ((FL_G & trc) != 0){Trc.out.printf("getLeaf\n");}
         Symbol sym = null;
-        if (randomNumber.get() > 0.9){       // empty
-            a.kind = A_EMP;
-            return;
-        }
         if (this.parameters.leaves == LEAVES_SET){
             sym = randomTerminalSet();
         } else {
