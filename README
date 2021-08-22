@@ -1,5 +1,4 @@
-# Regular Expression generator
-
+# Regular Expression Generator
 Authors: Angelo Borsotti
 
 This program contains the implementation the RE benchmark generation.
